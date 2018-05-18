@@ -33,7 +33,28 @@ var earthPhysics;
 console.log(days[0]);
 //html elements 
 var pTodayDate = document.getElementById("p--today-date");
+var buttonBirthday = document.getElementById("button--birthday");
+var pBirthdayMessage = document.getElementById("p--birthday-message");
+var inputDatePicker = document.getElementById("input--date-picker");
 //today as a date
 var today = new Date();
 console.log(today.getMonth());
 pTodayDate.innerHTML = "Today is " + days[today.getDay()] + months[today.getMonth()] + today.getDate() + "," + today.getFullYear();
+buttonBirthday.onclick = function () {
+    var userBDay = inputDatePicker.value;
+    var userBDayDate = new Date(userBDay);
+    pBirthdayMessage.innerHTML = makeDateString(userBDayDate);
+};
+function makeDateString(inputDate) {
+    //if today is your birthday 
+    if ((inputDate.getDate() === today.getDate())
+        &&
+            (inputDate.getMonth() === today.getMonth())) {
+        return "Happy Birthday!!";
+    }
+    var thisYearsbirthday = new Date();
+    thisYearsbirthday.setDate(inputDate.getDate());
+    thisYearsbirthday.setFullYear(today.getFullYear());
+    thisYearsbirthday.setMonth(inputDate.getMonth());
+    return "Your Birthday is " + days[thisYearsbirthday.getDay()] + "," + months[inputDate.getMonth()] + "," + inputDate.getDate() + ", " + today.getFullYear();
+}
